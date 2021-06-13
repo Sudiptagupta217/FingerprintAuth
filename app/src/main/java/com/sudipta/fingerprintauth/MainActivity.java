@@ -33,12 +33,14 @@ public class MainActivity extends AppCompatActivity {
     private KeyStore keyStore;
     private static final String KEY_NAME = "RIJURJ";
     private Cipher cipher;
-    private TextView textView;
+    public static TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        textView=findViewById(R.id.textview);
+
 
         KeyguardManager keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
         FingerprintManager fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);

@@ -5,14 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
-import android.net.wifi.hotspot2.pps.HomeSp;
 import android.os.CancellationSignal;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
 public class FingerprintHandler extends FingerprintManager.AuthenticationCallback {
-private Context context;
+    private Context context;
 
     public FingerprintHandler(Context context) {
         this.context = context;
@@ -20,16 +19,19 @@ private Context context;
 
     public void startAuthentication(FingerprintManager fingerprintManager, FingerprintManager.CryptoObject cryptoObject) {
         CancellationSignal cancellationSignal = new CancellationSignal();
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.USE_FINGERPRINT)!= PackageManager.PERMISSION_GRANTED)
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED)
             return;
-        fingerprintManager.authenticate(cryptoObject,cancellationSignal,0,this,null);
+        fingerprintManager.authenticate(cryptoObject, cancellationSignal, 0, this, null);
     }
 
 
     @Override
     public void onAuthenticationFailed() {
         super.onAuthenticationFailed();
-        Toast.makeText(context, "Fingerprint Authentication failed!", Toast.LENGTH_SHORT).show();
+        MainActivity.textView.setText("Fingerprint Authentication failed");
+        MainActivity.textView.getShadowColor();
+
+      //  Toast.makeText(context, "Fingerprint Authentication failed!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
